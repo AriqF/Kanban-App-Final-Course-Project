@@ -1,0 +1,47 @@
+{{define "general/header"}}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  rel="stylesheet" />
+<title>Kanban App</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="jquery-3.6.0.min.js"></script>
+<script src="https://kit.fontawesome.com/babb4f3fd7.js" crossorigin="anonymous"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          blue: "#0052CC",
+          hoverBlue: "#0047b3",
+          whitebg: "#f6f7fc",
+          whitefull: "#ffffff",
+          dark: "#23314c",
+          gray: "#f4f5f7",
+          grayText: "#5e6c84",
+          karl: "#C1C7D0",
+          gram: "#F4F5F7",
+          poppyred: "#FF5630",
+        },
+      },
+      table: {},
+    },
+    variants: {
+      extend: {
+        backgroundColor: ["even"],
+      },
+    },
+  };
+</script>
+<style>
+  .group:hover .group-hover\:flex {
+    display: flex !important;
+  }
+</style>
+{{end}}

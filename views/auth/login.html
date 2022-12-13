@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{template "general/header"}}
+  </head>
+  <body>
+    <main class="min-h-screen flex bg-whitebg">
+      <div
+        class="block max-w-md md:w-96 w-80 bg-white border border-karl rounded-sm shadow-lg m-auto p-6 space-y-5">
+        <h1 class="text-center text-xl font-semibold">Login</h1>
+        <form method="post" action="/login/process">
+          <div class="grid grid-cols-1 gap-6 mb-6">
+            <div>
+              <label for="email" class="block mb-2 text-sm font-medium text-dark">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="mx-auto font-normal bg-gram border border-karl text-dark text-sm rounded-sm focus:ring-blue focus:border-blue block w-full p-2.5"
+                placeholder="Enter your email"
+                required />
+            </div>
+            <div>
+              <label for="password" class="block mb-2 text-sm font-medium text-dark"
+                >Password</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="mx-auto font-normal bg-gram border border-karl text-dark text-sm rounded-sm focus:ring-blue focus:border-blue block w-full p-2.5"
+                placeholder="Enter your password"
+                required />
+            </div>
+          </div>
+          <div class="grid grid-cols-1">
+            <button
+              type="submit"
+              class="w-full text-white bg-blue hover:bg-hoverBlue focus:ring-4 focus:ring-blue-300 rounded-sm text-sm px-5 py-2.5 mr-2 mb-2">
+              Login
+            </button>
+            <a
+              href="/register"
+              class="text-sm text-center text-blue hover:text-hoverBlue hover:underline"
+              >Sign up for an account</a
+            >
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

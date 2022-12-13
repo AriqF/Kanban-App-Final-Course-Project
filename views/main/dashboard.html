@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{template "general/header"}}
+  </head>
+  <body>
+    <div class="flex flex-col w-screen h-screen overflow-auto text-gray-700">
+      <div class="flex items-center flex-shrink-0 w-full h-16 px-10 bg-white shadow-md">
+        <svg
+          class="w-8 h-8 text-indigo-600 stroke-current"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+        <div class="flex flex-row space-x-2 items-center justify-center ml-auto">
+          <a href="/category/add">
+            <button
+              class="w-full text-white bg-blue hover:bg-hoverBlue focus:ring-4 focus:ring-blue-300 transition duration-150 rounded-sm text-sm px-5 py-2.5 mr-2 mb-2">
+              Add Category
+            </button>
+          </a>
+          <form action="/logout">
+            <button
+              type="submit"
+              class="w-full text-gray-900 hover:text-white border border-poppyred hover:bg-poppyred transition duration-150 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center mr-2 mb-2">
+              Logout
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="px-10 mt-6">
+        <h1 class="text-2xl font-bold">Kanban App</h1>
+      </div>
+      <div class="flex flex-grow px-10 mt-4 space-x-6 overflow-auto">
+        {{range $val := .categories}}
+        <!-- category container -->
+        <div class="flex flex-col flex-shrink-0 w-64 bg-gray border-lg p-2 rounded-md">
+          <div class="flex justify-between items-center flex-shrink-0 h-10 px-2">
+            <h3 class="font-medium text-grayText">{{.Type}}</h3>
+            <div class="flex flex-between">
+              <a
+                href="/task/add?category={{.ID}}"
+                class="flex items-center justify-center w-6 h-6 ml-auto text-blue rounded hover:bg-hoverBlue hover:text-white hover:delay-75">
+                <i class="fa-solid fa-plus"></i>
+              </a>
+              <a
+                href="/category/delete?category_id={{.ID}}"
+                class="flex items-center justify-center w-6 h-6 ml-auto text-blue rounded hover:bg-hoverBlue hover:text-white hover:delay-75">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </div>
+          </div>
+          {{range .Tasks}}
+          <!-- task container -->
+
+          <div class="flex flex-col pb-3 overflow-auto mx-0.5">
+            <a href="/task/update?task_id={{.ID}}">
+              <div
+                class="relative flex justify-between flex-col p-4 pt-6 pb-6 mt-3 bg-white shadow-md rounded-md cursor-pointer bg-opacity-90 group hover:bg-opacity-100"
+                draggable="true">
+                <div
+                  class="flex flex-row space-x-3 absolute top-0 right-2 justify-center mt-3 mr-1">
+                  <a href="/task/update?task_id={{.ID}}">
+                    <i
+                      class="fa-solid fa-pen-to-square text-blue hover:bg-blue hover:text-white hover:p-1 hover:rounded-md hover:delay-75"></i>
+                  </a>
+                  <form method="post" action="/task/delete?task_id={{.ID}}">
+                    <button type="submit" class="">
+                      <i
+                        class="fa-solid fa-trash text-blue hover:bg-blue hover:text-white hover:p-1 hover:rounded-md hover:delay-75"></i>
+                    </button>
+                  </form>
+                </div>
+                <div class="space-y-2">
+                  <p></p>
+                  <h2 class="text-md font-medium">
+                    <span class="bg-blue p-1 rounded-sm text-white">{{.Title}}</span>
+                  </h2>
+                  <h4 class="text-sm font-normal">{{.Description}}</h4>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <a
+                    href="/task/update/process?task_id={{.ID}}&category_id={{categoryDec $val.ID}}">
+                    <button
+                      class="flex items-center justify-center w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex">
+                      <i
+                        class="fa-solid fa-arrow-left text-blue hover:bg-blue hover:text-white hover:p-1 hover:rounded-md hover:delay-75"></i>
+                    </button>
+                  </a>
+                  <a
+                    href="/task/update/process?task_id={{.ID}}&category_id={{categoryInc $val.ID}}">
+                    <button
+                      class="flex items-center justify-center w-5 h-5 mt-3 mr-2 text-blue rounded hover:bg-gray-200 hover:blue group group-hover:flex">
+                      <i
+                        class="fa-solid fa-arrow-right text-blue hover:bg-blue hover:text-white hover:p-1 hover:rounded-md hover:delay-75"></i>
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </a>
+          </div>
+          {{else}} {{end}}
+        </div>
+        {{else}} Empty Category {{end}}
+      </div>
+    </div>
+  </body>
+</html>
